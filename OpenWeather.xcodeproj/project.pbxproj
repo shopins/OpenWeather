@@ -23,8 +23,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7781A9A9AA14DCAEC5BDF615 /* Pods-SkillboxLesson14.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SkillboxLesson14.debug.xcconfig"; path = "Target Support Files/Pods-SkillboxLesson14/Pods-SkillboxLesson14.debug.xcconfig"; sourceTree = "<group>"; };
-		9A035B82AA26E25F0D5EFC16 /* Pods-SkillboxLesson14.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SkillboxLesson14.release.xcconfig"; path = "Target Support Files/Pods-SkillboxLesson14/Pods-SkillboxLesson14.release.xcconfig"; sourceTree = "<group>"; };
 		9A1AAE6297C8667E6B6E04B1 /* Pods-OpenWeather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenWeather.release.xcconfig"; path = "Target Support Files/Pods-OpenWeather/Pods-OpenWeather.release.xcconfig"; sourceTree = "<group>"; };
 		9B63A0FF6BB9F0EC9D85FE51 /* Pods_OpenWeather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OpenWeather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA40D34EC4237FB5020C1FC4 /* Pods-OpenWeather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenWeather.debug.xcconfig"; path = "Target Support Files/Pods-OpenWeather/Pods-OpenWeather.debug.xcconfig"; sourceTree = "<group>"; };
@@ -67,8 +65,6 @@
 		C88FF44A15BCCF81753831D1 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				7781A9A9AA14DCAEC5BDF615 /* Pods-SkillboxLesson14.debug.xcconfig */,
-				9A035B82AA26E25F0D5EFC16 /* Pods-SkillboxLesson14.release.xcconfig */,
 				CA40D34EC4237FB5020C1FC4 /* Pods-OpenWeather.debug.xcconfig */,
 				9A1AAE6297C8667E6B6E04B1 /* Pods-OpenWeather.release.xcconfig */,
 			);
@@ -124,7 +120,7 @@
 				D74C6E9C25244130005BF49E /* Sources */,
 				D74C6E9D25244130005BF49E /* Frameworks */,
 				D74C6E9E25244130005BF49E /* Resources */,
-				D913A861F1F9718D9C89F3F1 /* [CP] Embed Pods Frameworks */,
+				045928DC4EB5326329E60874 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -182,6 +178,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		045928DC4EB5326329E60874 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OpenWeather/Pods-OpenWeather-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OpenWeather/Pods-OpenWeather-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OpenWeather/Pods-OpenWeather-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		CF5C434E6A31D54C1375FD52 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -202,23 +215,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D913A861F1F9718D9C89F3F1 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OpenWeather/Pods-OpenWeather-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OpenWeather/Pods-OpenWeather-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OpenWeather/Pods-OpenWeather-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

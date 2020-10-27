@@ -1,10 +1,9 @@
-platform :ios, '14.0'
+platform :ios, '12.0'
 use_frameworks!
 
 target 'OpenWeather' do
 
-    pod 'Alamofire', '~> 5.2'
-	pod 'Realm'
+  pod 'Alamofire'
   pod 'RealmSwift'
 
 end
