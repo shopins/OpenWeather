@@ -31,11 +31,13 @@
       "size" : "40x40"
     },
     {
+      "filename" : "logoWeather128.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "60x60"
     },
     {
+      "filename" : "logoWeather180.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "60x60"
@@ -71,11 +73,13 @@
       "size" : "40x40"
     },
     {
+      "filename" : "logoWeather144.png",
       "idiom" : "ipad",
       "scale" : "1x",
       "size" : "76x76"
     },
     {
+      "filename" : "logoWeather300.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "76x76"
@@ -86,6 +90,7 @@
       "size" : "83.5x83.5"
     },
     {
+      "filename" : "logoWeather512.png",
       "idiom" : "ios-marketing",
       "scale" : "1x",
       "size" : "1024x1024"

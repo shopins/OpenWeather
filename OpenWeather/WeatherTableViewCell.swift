@@ -12,14 +12,8 @@ class WeatherTableViewCell: UITableViewCell {
     @IBOutlet weak var windLabel: UILabel!
     @IBOutlet weak var dayTempLabel: UILabel!
     @IBOutlet weak var nightTempLabel: UILabel!
-    
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var nightLabel: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
 
     public func configure(date: String,
                           icon: UIImage?,

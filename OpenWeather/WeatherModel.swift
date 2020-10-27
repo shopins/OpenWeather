@@ -1,80 +1,57 @@
 import Foundation
-import Alamofire
 import RealmSwift
 
-var weather: Weather?
-
-let realm = try! Realm()
-
-func loadRealmData(city: City?) {
-    if let city = city {
-        weather = realm.object(ofType: Weather.self, forPrimaryKey: city.name)
+func realmWrite(execute: @escaping (_ r: Realm) -> Void) {
+    let realm = try! Realm()
+    try! realm.write {
+        execute(realm)
     }
 }
 
-func writeRealmData() {
-        try! realm.write {
-            if let weather = weather {
-                realm.add(weather, update: .modified)
-            }
-        }
+func loadWeatherFromCache(city: City?) -> Weather? {
+    let realm = try! Realm()
+    if let city = city {
+        return realm.object(ofType: Weather.self, forPrimaryKey: city.name)
+    }
+    return nil
 }
 
-func markDataWeather (city: City, tempWeather: Weather) {
+func writeWeatherToCache(weather: Weather?) {
+    realmWrite { realm in
+        if let weather = weather {
+                        realm.add(weather, update: .modified)
+        }
+    }
+}
+
+func markDataWeather (city: City, weather: Weather) -> Weather {
     deleteMarkedData(city: city)
     
-    tempWeather.lastUpdate = Date()
-    tempWeather.city = city.name
-    for day in tempWeather.daily {
+    weather.city = city.name
+    for day in weather.daily {
         day.city = city.name
         for w in day.weather {
             w.city = city.name
         }
         day.temp?.city = city.name
     }
-    if let current = tempWeather.current {
+    if let current = weather.current {
         current.city = city.name
         for w in current.weather {
             w.city = city.name
         }
     }
-    weather = tempWeather
+    return weather
 }
 
 func deleteMarkedData (city: City) {
-    try! realm.write {
+    realmWrite { realm in
         realm.delete(realm.objects(Weather.self).filter("city == \"\(city.name)\""))
         realm.delete(realm.objects(WeatherElement.self).filter("city == \"\(city.name)\""))
         realm.delete(realm.objects(Temp.self).filter("city == \"\(city.name)\""))
         realm.delete(realm.objects(Daily.self).filter("city == \"\(city.name)\""))
         realm.delete(realm.objects(Current.self).filter("city == \"\(city.name)\""))
     }
-}
-
-
- func loadImage(icon: String?) -> UIImage? {
-    var image : UIImage?
-    let sem = DispatchSemaphore(value: 0)
-    guard let icon = icon,
-          let url = URL(string: "https://openweathermap.org/img/wn/\(icon)@2x.png") else { sem.signal(); return nil }
-    URLSession.shared.dataTask(with: url) { (data, response, error) in
-        if error != nil {
-            print("Failed fetching image:", error!)
-            sem.signal()
-            return
-        }
-        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-            print("Not a proper HTTPURLResponse or statusCode")
-            sem.signal()
-            return
-        }
-        if let data = data {
-            image = UIImage(data: data)
-            sem.signal()
-        }
-    }.resume()
-    sem.wait()
-return image
 }
 
  func convertDate(date: Int) -> String {

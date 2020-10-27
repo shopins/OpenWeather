@@ -25,41 +25,34 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         forcastTableView.register(WeatherTableViewCell.nib, forCellReuseIdentifier: WeatherTableViewCell.ident)
         weatherSwitch.addTarget(self, action: #selector(changeValue), for: .valueChanged)
-        if let city = CityData.get(name: "Москва") {
-            loadRealmData(city: city)
-        }
-        configLabels()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        if let city = CityData.get(name: "Москва") {
-            loadWeather(city: city, loader: true)
+        
+        if let city = getCity() {
+            configLabels(weather: loadWeatherFromCache(city: city))
+            downloadDataFromAPI(city: city, loader: true)
         }
     }
     
-    private func loadWeather(city: City?, loader : Bool) {
+    private func downloadDataFromAPI(city: City?, loader : Bool) {
         if let city = city {
             if loader {
                 WeatherLoader().loadStandard(city: city) { weather in
-                    markDataWeather(city: city, tempWeather: weather)
-                    self.configLabels()
+                    weather.lastUpdate = Date()
+                    writeWeatherToCache(weather: markDataWeather(city: city, weather: weather))
+                    self.configLabels(weather: weather)
                     self.forcastTableView.reloadData()
-                    writeRealmData()
                    }
             } else {
                 WeatherLoader().loadAlamofire(city: city) { weather in
-                    markDataWeather(city: city, tempWeather: weather)
-                    self.configLabels()
+                    weather.lastUpdate = Date()
+                    writeWeatherToCache(weather: markDataWeather(city: city, weather: weather))
+                    self.configLabels(weather: weather)
                     self.forcastTableView.reloadData()
-                    writeRealmData()
                    }
             }
         }
     }
 
-    
-    private func configLabels() {
+    private func configLabels(weather: Weather?) {
         if let lastUpdate = weather?.lastUpdate,
            let city = weather?.city,
            let temp = weather?.current?.temp,
@@ -69,9 +62,9 @@ class ViewController: UIViewController {
            let wind = weather?.current?.windSpeed
            {
             let formatter = DateFormatter()
-            formatter.dateStyle = .long
-            formatter.timeStyle = .medium
-            formatter.locale = Locale(identifier: "ru_RU")
+                formatter.dateStyle = .long
+                formatter.timeStyle = .medium
+                formatter.locale = Locale(identifier: "ru_RU")
             updateLabel.text = "Обновлено: \(formatter.string(from: lastUpdate))"
             cityLabel.text = city
             temperatureLabel.text = "\(temp.roundTo(places: 1))° C"
@@ -82,21 +75,28 @@ class ViewController: UIViewController {
         }
     }
     
-    @objc func changeValue(sender: UISwitch) {
+    private func getCity() -> City? {
+        if weatherSwitch.isOn {
+            return CityData.get(name: "Хабаровск")
+        }
+        else {
+            return CityData.get(name: "Москва")
+        }
+    }
+    
+    @objc private func changeValue(sender: UISwitch) {
         if sender.isOn {
             if let city = CityData.get(name: "Хабаровск") {
-                loadRealmData(city: city)
-                configLabels()
+                configLabels(weather: loadWeatherFromCache(city: city))
                 forcastTableView.reloadData()
-                loadWeather(city: city, loader: false)
+                downloadDataFromAPI(city: city, loader: false)
             }
         }
         else {
             if let city = CityData.get(name: "Москва") {
-                loadRealmData(city: city)
-                configLabels()
+                configLabels(weather: loadWeatherFromCache(city: city))
                 forcastTableView.reloadData()
-                loadWeather(city: city, loader: true)
+                downloadDataFromAPI(city: city, loader: true)
             }
         }
     }
@@ -109,7 +109,9 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherTableViewCell", for: indexPath) as! WeatherTableViewCell
-        if let weather = weather?.daily[indexPath.row + 1],
+        
+        if let city = getCity(),
+           let weather = loadWeatherFromCache(city: city)?.daily[indexPath.row + 1],
            let temp = weather.temp {
             cell.configure(date: convertDate(date: weather.unixDate),
                            icon: loadImage(icon: weather.weather.first?.icon),

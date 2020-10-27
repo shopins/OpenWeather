@@ -1,7 +1,6 @@
 
 import Foundation
 import Alamofire
-//import RealmSwift
 
 class WeatherLoader{
     
@@ -44,7 +43,31 @@ class WeatherLoader{
                 }
             }
         }
+}
 
+func loadImage(icon: String?) -> UIImage? {
+   var image : UIImage?
+   let sem = DispatchSemaphore(value: 0)
+   guard let icon = icon,
+         let url = URL(string: "https://openweathermap.org/img/wn/\(icon)@2x.png") else { sem.signal(); return nil }
+   URLSession.shared.dataTask(with: url) { (data, response, error) in
+       if error != nil {
+           print("Failed fetching image:", error!)
+           sem.signal()
+           return
+       }
+       guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+           print("Not a proper HTTPURLResponse or statusCode")
+           sem.signal()
+           return
+       }
+       if let data = data {
+           image = UIImage(data: data)
+           sem.signal()
+       }
+   }.resume()
+   sem.wait()
+return image
 }
 
 
