@@ -1,10 +1,3 @@
-//
-//  weatherTableViewCell.swift
-//  SkillboxLesson12
-//
-//  Created by Сергей Шопин on 03.10.2020.
-//
-
 import UIKit
 
 class WeatherTableViewCell: UITableViewCell {

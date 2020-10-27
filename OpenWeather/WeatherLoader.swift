@@ -1,13 +1,7 @@
-//
-//  WeatherLoader.swift
-//  SkillboxLesson12
-//
-//  Created by Сергей Шопин on 03.10.2020.
-//
 
 import Foundation
 import Alamofire
-import RealmSwift
+//import RealmSwift
 
 class WeatherLoader{
     

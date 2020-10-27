@@ -1,16 +1,10 @@
-//
-//  WeatherModel.swift
-//  SkillboxLesson14
-//
-//  Created by Сергей Шопин on 25.10.2020.
-//
-
 import Foundation
 import Alamofire
 import RealmSwift
 
 var weather: Weather?
 
+let realm = try! Realm()
 
 func loadRealmData(city: City?) {
     if let city = city {

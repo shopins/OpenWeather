@@ -1,9 +1,3 @@
-//
-//  ViewController.swift
-//  SkillboxLesson12
-//
-//  Created by Сергей Шопин on 30.09.2020.
-//
 
 import UIKit
 

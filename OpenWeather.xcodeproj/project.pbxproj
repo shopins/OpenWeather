@@ -7,15 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D716B9062544381D000AC2AE /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D716B9052544381D000AC2AE /* RealmModel.swift */; };
-		D716B909254439E8000AC2AE /* RealmTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D716B908254439E8000AC2AE /* RealmTableViewController.swift */; };
-		D716B90C254439FA000AC2AE /* CoreDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D716B90B254439FA000AC2AE /* CoreDataTableViewController.swift */; };
-		D716B90F25444E5F000AC2AE /* ToDoItemRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = D716B90E25444E5F000AC2AE /* ToDoItemRealm.swift */; };
 		D716B91225448EE8000AC2AE /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D716B91125448EE7000AC2AE /* WeatherModel.swift */; };
-		D716B93C25449825000AC2AE /* OpenWeather.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D716B93A25449825000AC2AE /* OpenWeather.xcdatamodeld */; };
-		D716B94025449F77000AC2AE /* CoreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D716B93F25449F77000AC2AE /* CoreDataModel.swift */; };
-		D71D8B74252DD35F00B4B57E /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71D8B73252DD35F00B4B57E /* FirstViewController.swift */; };
-		D71D8B77252DD5FB00B4B57E /* Persistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71D8B76252DD5FB00B4B57E /* Persistance.swift */; };
 		D74C6EA425244130005BF49E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74C6EA325244130005BF49E /* AppDelegate.swift */; };
 		D74C6EA625244130005BF49E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74C6EA525244130005BF49E /* SceneDelegate.swift */; };
 		D74C6EA825244130005BF49E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74C6EA725244130005BF49E /* ViewController.swift */; };
@@ -36,15 +28,7 @@
 		9A1AAE6297C8667E6B6E04B1 /* Pods-OpenWeather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenWeather.release.xcconfig"; path = "Target Support Files/Pods-OpenWeather/Pods-OpenWeather.release.xcconfig"; sourceTree = "<group>"; };
 		9B63A0FF6BB9F0EC9D85FE51 /* Pods_OpenWeather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OpenWeather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA40D34EC4237FB5020C1FC4 /* Pods-OpenWeather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenWeather.debug.xcconfig"; path = "Target Support Files/Pods-OpenWeather/Pods-OpenWeather.debug.xcconfig"; sourceTree = "<group>"; };
-		D716B9052544381D000AC2AE /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
-		D716B908254439E8000AC2AE /* RealmTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTableViewController.swift; sourceTree = "<group>"; };
-		D716B90B254439FA000AC2AE /* CoreDataTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTableViewController.swift; sourceTree = "<group>"; };
-		D716B90E25444E5F000AC2AE /* ToDoItemRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItemRealm.swift; sourceTree = "<group>"; };
 		D716B91125448EE7000AC2AE /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
-		D716B93B25449825000AC2AE /* SkillboxLesson14.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SkillboxLesson14.xcdatamodel; sourceTree = "<group>"; };
-		D716B93F25449F77000AC2AE /* CoreDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataModel.swift; sourceTree = "<group>"; };
-		D71D8B73252DD35F00B4B57E /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		D71D8B76252DD5FB00B4B57E /* Persistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistance.swift; sourceTree = "<group>"; };
 		D74C6EA025244130005BF49E /* OpenWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D74C6EA325244130005BF49E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D74C6EA525244130005BF49E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -115,14 +99,6 @@
 				D74C6EA325244130005BF49E /* AppDelegate.swift */,
 				D74C6EA525244130005BF49E /* SceneDelegate.swift */,
 				D74C6EA925244130005BF49E /* Main.storyboard */,
-				D71D8B73252DD35F00B4B57E /* FirstViewController.swift */,
-				D71D8B76252DD5FB00B4B57E /* Persistance.swift */,
-				D716B908254439E8000AC2AE /* RealmTableViewController.swift */,
-				D716B90E25444E5F000AC2AE /* ToDoItemRealm.swift */,
-				D716B9052544381D000AC2AE /* RealmModel.swift */,
-				D716B90B254439FA000AC2AE /* CoreDataTableViewController.swift */,
-				D716B93F25449F77000AC2AE /* CoreDataModel.swift */,
-				D716B93A25449825000AC2AE /* OpenWeather.xcdatamodeld */,
 				D74C6EA725244130005BF49E /* ViewController.swift */,
 				D74C6ECE25287C67005BF49E /* City.swift */,
 				D74C6EC5252827D3005BF49E /* Weather.swift */,
@@ -252,18 +228,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D716B90F25444E5F000AC2AE /* ToDoItemRealm.swift in Sources */,
 				D74C6EC6252827D3005BF49E /* Weather.swift in Sources */,
-				D716B94025449F77000AC2AE /* CoreDataModel.swift in Sources */,
 				D74C6ED52528882B005BF49E /* WeatherTableViewCell.swift in Sources */,
-				D716B90C254439FA000AC2AE /* CoreDataTableViewController.swift in Sources */,
 				D74C6EA825244130005BF49E /* ViewController.swift in Sources */,
-				D716B9062544381D000AC2AE /* RealmModel.swift in Sources */,
-				D71D8B74252DD35F00B4B57E /* FirstViewController.swift in Sources */,
 				D74C6ECF25287C67005BF49E /* City.swift in Sources */,
-				D716B909254439E8000AC2AE /* RealmTableViewController.swift in Sources */,
-				D71D8B77252DD5FB00B4B57E /* Persistance.swift in Sources */,
-				D716B93C25449825000AC2AE /* OpenWeather.xcdatamodeld in Sources */,
 				D716B91225448EE8000AC2AE /* WeatherModel.swift in Sources */,
 				D74C6EC925283B1B005BF49E /* WeatherLoader.swift in Sources */,
 				D74C6EA425244130005BF49E /* AppDelegate.swift in Sources */,
@@ -416,15 +384,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "$(SRCROOT)/SkillboxLesson14/Info.plist";
+				DEVELOPMENT_TEAM = Y9XPCMVA2M;
+				INFOPLIST_FILE = "$(SRCROOT)/OpenWeather/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = shopin.SkillboxLesson12;
+				PRODUCT_BUNDLE_IDENTIFIER = shopin.OpenWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -435,15 +404,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "$(SRCROOT)/SkillboxLesson14/Info.plist";
+				DEVELOPMENT_TEAM = Y9XPCMVA2M;
+				INFOPLIST_FILE = "$(SRCROOT)/OpenWeather/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = shopin.SkillboxLesson12;
+				PRODUCT_BUNDLE_IDENTIFIER = shopin.OpenWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -469,19 +439,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		D716B93A25449825000AC2AE /* OpenWeather.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				D716B93B25449825000AC2AE /* SkillboxLesson14.xcdatamodel */,
-			);
-			currentVersion = D716B93B25449825000AC2AE /* SkillboxLesson14.xcdatamodel */;
-			path = OpenWeather.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = D74C6E9825244130005BF49E /* Project object */;
 }
