@@ -16,7 +16,7 @@ class WeatherTableViewCell: UITableViewCell {
     @IBOutlet weak var nightLabel: UILabel!
 
     public func configure(date: String,
-                          icon: UIImage?,
+                          icon: String,
                           pressure: String,
                           humidity: String,
                           wind: String,
@@ -30,7 +30,9 @@ class WeatherTableViewCell: UITableViewCell {
         dayTempLabel.text = dayTemp
         nightLabel.text = "ночью"
         nightTempLabel.text = nightTemp
-        weatherImageView.image = icon
+        loadImage(icon: icon) { image in
+            self.weatherImageView.image = image
+        }
     }
     
 }

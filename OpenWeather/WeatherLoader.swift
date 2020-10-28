@@ -2,9 +2,7 @@
 import Foundation
 import Alamofire
 
-class WeatherLoader{
-    
-    func loadStandard(city: City, completion: @escaping (Weather) -> Void) {
+func loadWeatherStandard(city: City, completion: @escaping (Weather) -> Void) {
         let urlString = "https://api.openweathermap.org/data/2.5/onecall?lat=\(city.lat)&lon=\(city.lon)&exclude=minutely,hourly,alerts&lang=ru&units=metric&appid=f4f83716824d96e662b7c9214adfe2d1"
         guard let url = URL(string: urlString) else { return }
         URLSession.shared.dataTask(with: url) { (data, response, error) in
@@ -26,7 +24,7 @@ class WeatherLoader{
         }.resume()
     }
     
-    func loadAlamofire(city: City, completion: @escaping (Weather) -> Void) {
+func loadWeatherAlamofire(city: City, completion: @escaping (Weather) -> Void) {
             let urlString = "https://api.openweathermap.org/data/2.5/onecall?lat=\(city.lat)&lon=\(city.lon)&exclude=minutely,hourly,alerts&lang=ru&units=metric&appid=f4f83716824d96e662b7c9214adfe2d1"
             AF.request(urlString).responseJSON { responseJSON in
                 switch responseJSON.result {
@@ -39,36 +37,30 @@ class WeatherLoader{
                                 }
                             }
                     case .failure(let error):
-                            print("Failed loading weather data:", error)
+                            print("Failed loading weather data: ", error)
                 }
             }
+}
+
+func loadImage(icon: String?, completion: @escaping (UIImage?) -> Void) {
+    guard let icon = icon else { return }
+    let urlString = "https://openweathermap.org/img/wn/\(icon)@2x.png"
+    AFRequestData(url: urlString) { data in
+        if let data = data {
+            completion(UIImage(data: data))
         }
+    }
 }
 
-func loadImage(icon: String?) -> UIImage? {
-   var image : UIImage?
-   let sem = DispatchSemaphore(value: 0)
-   guard let icon = icon,
-         let url = URL(string: "https://openweathermap.org/img/wn/\(icon)@2x.png") else { sem.signal(); return nil }
-   URLSession.shared.dataTask(with: url) { (data, response, error) in
-       if error != nil {
-           print("Failed fetching image:", error!)
-           sem.signal()
-           return
-       }
-       guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-           print("Not a proper HTTPURLResponse or statusCode")
-           sem.signal()
-           return
-       }
-       if let data = data {
-           image = UIImage(data: data)
-           sem.signal()
-       }
-   }.resume()
-   sem.wait()
-return image
+func AFRequestData(url : String, data: @escaping (Data?) -> Void )
+{
+    AF.request(url).response { response in
+        switch response.result
+        {
+        case .success:
+            data(response.data)
+        case .failure(let error):
+            print("Failed loading data: ", error)
+        }
+    }
 }
-
-
-

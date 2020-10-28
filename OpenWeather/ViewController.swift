@@ -26,23 +26,37 @@ class ViewController: UIViewController {
         forcastTableView.register(WeatherTableViewCell.nib, forCellReuseIdentifier: WeatherTableViewCell.ident)
         weatherSwitch.addTarget(self, action: #selector(changeValue), for: .valueChanged)
         
+        let notificationCenter = NotificationCenter.default
+            notificationCenter.addObserver(self, selector: #selector(appBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
+        
+        if Persistance.shared.city == "Хабаровск" {
+            weatherSwitch.isOn = true
+        }
+    }
+    
+    @objc func appBecomeActive() {
         if let city = getCity() {
             configLabels(weather: loadWeatherFromCache(city: city))
             downloadDataFromAPI(city: city, loader: true)
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+    }
+    
     private func downloadDataFromAPI(city: City?, loader : Bool) {
         if let city = city {
             if loader {
-                WeatherLoader().loadStandard(city: city) { weather in
+                loadWeatherStandard(city: city) { weather in
                     weather.lastUpdate = Date()
                     writeWeatherToCache(weather: markDataWeather(city: city, weather: weather))
                     self.configLabels(weather: weather)
                     self.forcastTableView.reloadData()
                    }
             } else {
-                WeatherLoader().loadAlamofire(city: city) { weather in
+                loadWeatherAlamofire(city: city) { weather in
                     weather.lastUpdate = Date()
                     writeWeatherToCache(weather: markDataWeather(city: city, weather: weather))
                     self.configLabels(weather: weather)
@@ -90,6 +104,7 @@ class ViewController: UIViewController {
                 configLabels(weather: loadWeatherFromCache(city: city))
                 forcastTableView.reloadData()
                 downloadDataFromAPI(city: city, loader: false)
+                Persistance.shared.city = "Хабаровск"
             }
         }
         else {
@@ -97,6 +112,7 @@ class ViewController: UIViewController {
                 configLabels(weather: loadWeatherFromCache(city: city))
                 forcastTableView.reloadData()
                 downloadDataFromAPI(city: city, loader: true)
+                Persistance.shared.city = "Москва"
             }
         }
     }
@@ -112,9 +128,10 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate{
         
         if let city = getCity(),
            let weather = loadWeatherFromCache(city: city)?.daily[indexPath.row + 1],
-           let temp = weather.temp {
+           let temp = weather.temp,
+           let icon = weather.weather.first?.icon {
             cell.configure(date: convertDate(date: weather.unixDate),
-                           icon: loadImage(icon: weather.weather.first?.icon),
+                           icon: icon,
                            pressure: "Давление: \(weather.pressure) гПа",
                            humidity: "Влажность: \(weather.humidity)%",
                            wind: "Ветер: \(weather.windSpeed.roundTo(places: 1)) м/с",
