@@ -17,3 +17,5 @@ struct CityData {
         }
     }
 }
+
+let cities = [CityData.get(name: "Москва"), CityData.get(name: "Хабаровск")]
