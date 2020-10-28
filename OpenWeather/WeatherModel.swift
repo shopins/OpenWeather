@@ -8,49 +8,45 @@ func realmWrite(execute: @escaping (_ r: Realm) -> Void) {
     }
 }
 
-func loadWeatherFromCache(city: City?) -> Weather? {
+func loadWeatherFromCache(cityName: String) -> Weather? {
     let realm = try! Realm()
-    if let city = city {
-        return realm.object(ofType: Weather.self, forPrimaryKey: city.name)
-    }
-    return nil
+        return realm.object(ofType: Weather.self, forPrimaryKey: cityName)
 }
 
-func writeWeatherToCache(weather: Weather?) {
+func writeWeatherToCache(weather: Weather) {
     realmWrite { realm in
-        if let weather = weather {
-                        realm.add(weather, update: .modified)
-        }
+        realm.add(weather, update: .modified)
     }
 }
 
-func markDataWeather (city: City, weather: Weather) -> Weather {
-    deleteMarkedData(city: city)
+func markDataWeather (cityName: String, weather: Weather) -> Weather {
     
-    weather.city = city.name
+    deleteMarkedData(cityName: cityName)
+    
+    weather.city = cityName
     for day in weather.daily {
-        day.city = city.name
+        day.city = cityName
         for w in day.weather {
-            w.city = city.name
+            w.city = cityName
         }
-        day.temp?.city = city.name
+        day.temp?.city = cityName
     }
     if let current = weather.current {
-        current.city = city.name
+        current.city = cityName
         for w in current.weather {
-            w.city = city.name
+            w.city = cityName
         }
     }
     return weather
 }
 
-func deleteMarkedData (city: City) {
+func deleteMarkedData (cityName: String) {
     realmWrite { realm in
-        realm.delete(realm.objects(Weather.self).filter("city == \"\(city.name)\""))
-        realm.delete(realm.objects(WeatherElement.self).filter("city == \"\(city.name)\""))
-        realm.delete(realm.objects(Temp.self).filter("city == \"\(city.name)\""))
-        realm.delete(realm.objects(Daily.self).filter("city == \"\(city.name)\""))
-        realm.delete(realm.objects(Current.self).filter("city == \"\(city.name)\""))
+        realm.delete(realm.objects(Weather.self).filter("city == \"\(cityName)\""))
+        realm.delete(realm.objects(WeatherElement.self).filter("city == \"\(cityName)\""))
+        realm.delete(realm.objects(Temp.self).filter("city == \"\(cityName)\""))
+        realm.delete(realm.objects(Daily.self).filter("city == \"\(cityName)\""))
+        realm.delete(realm.objects(Current.self).filter("city == \"\(cityName)\""))
     }
 }
 

@@ -26,17 +26,17 @@ class ViewController: UIViewController {
         let notificationCenter = NotificationCenter.default
             notificationCenter.addObserver(self, selector: #selector(appBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
         
-      if Persistance.shared.city == "" {
-            cityButton.setTitle("Выберите город", for: .normal)
-      } else {
-            cityButton.setTitle(Persistance.shared.city, for: .normal)
-      }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if Persistance.shared.city == "" {
-              performSegue(withIdentifier: "popupCity", sender: nil)
+        if !Persistance.shared.isLoadCities {
+            downloadCityDataFromAPI() {
+                if Persistance.shared.currentCity == "" {
+                    self.cityButton.setTitle("Выберите город", for: .normal)
+                    self.performSegue(withIdentifier: "popupCity", sender: nil)
+                }
+            }
         }
     }
     
@@ -48,63 +48,59 @@ class ViewController: UIViewController {
     
     @objc func appBecomeActive() {
         if let city = getCurrentCity() {
-            configLabels(weather: loadWeatherFromCache(city: city))
-            downloadDataFromAPI(city: city)
+            if let weather = loadWeatherFromCache(cityName: city.name) {
+                configLabels(weather: weather)
+            }
+            downloadWeatherDataFromAPI(city: city)
         }
     }
     
     @IBAction func pressReload(_ sender: UIButton) {
         if let city = getCurrentCity() {
-            downloadDataFromAPI(city: city)
+            downloadWeatherDataFromAPI(city: city)
         }
     }
     
-    private func downloadDataFromAPI(city: City?) {
-        if let city = city {
+    private func downloadWeatherDataFromAPI(city: City) {
             loadWeatherAlamofire(city: city) { weather in
                 weather.lastUpdate = Date()
-                writeWeatherToCache(weather: markDataWeather(city: city, weather: weather))
+                writeWeatherToCache(weather: markDataWeather(cityName: city.name, weather: weather))
                 self.configLabels(weather: weather)
                 self.forcastTableView.reloadData()
             }
-        }
     }
-
-    private func configLabels(weather: Weather?) {
-        if let lastUpdate = weather?.lastUpdate,
-           let city = weather?.city,
-           let temp = weather?.current?.temp,
-           let description = weather?.current?.weather.first?.weatherDescription,
-           let pressure = weather?.current?.pressure,
-           let humidity = weather?.current?.humidity,
-           let wind = weather?.current?.windSpeed
+    
+    private func configLabels(weather: Weather) {
+        if let temp = weather.current?.temp,
+           let description = weather.current?.weather.first?.weatherDescription,
+           let pressure = weather.current?.pressure,
+           let humidity = weather.current?.humidity,
+           let wind = weather.current?.windSpeed
            {
             let formatter = DateFormatter()
                 formatter.dateStyle = .long
                 formatter.timeStyle = .medium
                 formatter.locale = Locale(identifier: "ru_RU")
-            updateLabel.text = "Обновлено: \(formatter.string(from: lastUpdate))"
-            cityButton.setTitle(city, for: .normal)
+            updateLabel.text = "Обновлено: \(formatter.string(from: weather.lastUpdate))"
+            cityButton.setTitle(weather.city, for: .normal)
             temperatureLabel.text = "\(temp.roundTo(places: 1))° C"
-            descriptionLabel.text = String(description)
+            descriptionLabel.text = description
             pressureLabel.text = "Давление: \(pressure) гПа"
             humidityLabel.text = "Влажность: \(humidity)%"
             windLabel.text = "Ветер: \(wind.roundTo(places: 1)) м/с"
         }
-    }
-    
-    private func getCurrentCity() -> City? {
-        return CityData.get(name: Persistance.shared.city)
     }
 }
 
 extension ViewController: PopUpViewControllerDelegate{
     func changeCity(_ popUpViewController: PopUpViewController, city: City?) {
         if let city = city {
-            Persistance.shared.city = city.name
-            configLabels(weather: loadWeatherFromCache(city: city))
+            Persistance.shared.currentCity = city.name
+            if let weather = loadWeatherFromCache(cityName: city.name) {
+                configLabels(weather: weather)
+            }
             forcastTableView.reloadData()
-            downloadDataFromAPI(city: city)
+            downloadWeatherDataFromAPI(city: city)
         }
     }
 }
@@ -118,7 +114,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate{
         let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherTableViewCell", for: indexPath) as! WeatherTableViewCell
         
         if let city = getCurrentCity(),
-           let weather = loadWeatherFromCache(city: city)?.daily[indexPath.row + 1],
+           let weather = loadWeatherFromCache(cityName: city.name)?.daily[indexPath.row + 1],
            let temp = weather.temp,
            let icon = weather.weather.first?.icon {
             cell.configure(date: convertDate(date: weather.unixDate),
@@ -147,7 +143,7 @@ func moveIn(view: UIView) {
         }
     }
     
-    func moveOut(view: UIView) {
+func moveOut(view: UIView) {
         UIView.animate(withDuration: 0.24, animations: {
             view.transform = CGAffineTransform(scaleX: 1.35, y: 1.35)
             view.alpha = 0.0

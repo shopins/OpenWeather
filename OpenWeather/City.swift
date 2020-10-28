@@ -1,21 +1,27 @@
 
 import Foundation
+import RealmSwift
 
-struct City {
-    let name: String
-    let lat: Double
-    let lon: Double
-    let timezone: String
-}
-
-struct CityData {
-    static func get(name: String) -> City? {
-        switch name {
-        case "Москва": return City(name: "Москва", lat: 55.76, lon: 37.62, timezone: "Europe/Moscow")
-        case "Хабаровск": return City(name: "Хабаровск", lat: 44.48, lon: 135.07, timezone: "Asia/Vladivostok")
-            default: return nil
-        }
+@objcMembers class City: Object, Codable {
+    dynamic var name: String = ""
+    dynamic var subject: String = ""
+    dynamic var coords: Coords?
+    
+    enum CodingKeys: String, CodingKey {
+        case name, subject, coords
+    }
+    override static func primaryKey() -> String?
+    {
+        return "name"
     }
 }
 
-let cities = [CityData.get(name: "Москва"), CityData.get(name: "Хабаровск")]
+@objcMembers class Coords: Object, Codable {
+    dynamic var lat: String = ""
+    dynamic var lon: String = ""
+    
+    enum CodingKeys: String, CodingKey {
+        case lat, lon
+    }
+}
+
