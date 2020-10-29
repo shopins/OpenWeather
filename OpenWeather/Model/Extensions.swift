@@ -23,3 +23,13 @@ func realmWrite(execute: @escaping (_ r: Realm) -> Void) {
         execute(realm)
     }
 }
+
+func distinct<T: Equatable>(_ source: [T]) -> [T] {
+  var unique = [T]()
+  for item in source {
+    if !unique.contains(item) {
+      unique.append(item)
+    }
+  }
+  return unique
+}

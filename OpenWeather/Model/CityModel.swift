@@ -60,12 +60,4 @@ func getSubjectsFiltered(filter: String) -> [String] {
     }
 }
 
-func distinct<T: Equatable>(_ source: [T]) -> [T] {
-  var unique = [T]()
-  for item in source {
-    if !unique.contains(item) {
-      unique.append(item)
-    }
-  }
-  return unique
-}
+
