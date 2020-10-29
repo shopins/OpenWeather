@@ -10,6 +10,8 @@
 		D716B91225448EE8000AC2AE /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D716B91125448EE7000AC2AE /* WeatherModel.swift */; };
 		D7193A3C25497EFF00F26702 /* CityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7193A3B25497EFF00F26702 /* CityModel.swift */; };
 		D7193A47254A6C8900F26702 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7193A46254A6C8900F26702 /* StartViewController.swift */; };
+		D7193A4B254AA36800F26702 /* BounceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7193A4A254AA36700F26702 /* BounceButton.swift */; };
+		D7193A52254AA49400F26702 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7193A51254AA49400F26702 /* Extensions.swift */; };
 		D74C6EA425244130005BF49E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74C6EA325244130005BF49E /* AppDelegate.swift */; };
 		D74C6EA625244130005BF49E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74C6EA525244130005BF49E /* SceneDelegate.swift */; };
 		D74C6EA825244130005BF49E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74C6EA725244130005BF49E /* ViewController.swift */; };
@@ -33,6 +35,8 @@
 		D716B91125448EE7000AC2AE /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		D7193A3B25497EFF00F26702 /* CityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityModel.swift; sourceTree = "<group>"; };
 		D7193A46254A6C8900F26702 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		D7193A4A254AA36700F26702 /* BounceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BounceButton.swift; sourceTree = "<group>"; };
+		D7193A51254AA49400F26702 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D74C6EA025244130005BF49E /* OpenWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D74C6EA325244130005BF49E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D74C6EA525244130005BF49E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +83,48 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		D7193A4D254AA37300F26702 /* CustomClasses */ = {
+			isa = PBXGroup;
+			children = (
+				D7193A50254AA43700F26702 /* Xib */,
+				D74C6ECE25287C67005BF49E /* City.swift */,
+				D74C6EC5252827D3005BF49E /* Weather.swift */,
+				D7CA267025491376008F8296 /* Persistance.swift */,
+				D7193A4A254AA36700F26702 /* BounceButton.swift */,
+			);
+			path = CustomClasses;
+			sourceTree = "<group>";
+		};
+		D7193A4E254AA39B00F26702 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D7193A3B25497EFF00F26702 /* CityModel.swift */,
+				D716B91125448EE7000AC2AE /* WeatherModel.swift */,
+				D74C6EC825283B1B005BF49E /* LoaderAlamofire.swift */,
+				D7193A51254AA49400F26702 /* Extensions.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D7193A4F254AA3C900F26702 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				D7193A46254A6C8900F26702 /* StartViewController.swift */,
+				D74C6EA725244130005BF49E /* ViewController.swift */,
+				D7CA267725492CC8008F8296 /* PopUpViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		D7193A50254AA43700F26702 /* Xib */ = {
+			isa = PBXGroup;
+			children = (
+				D74C6ED42528882B005BF49E /* WeatherTableViewCell.xib */,
+				D74C6ED32528882B005BF49E /* WeatherTableViewCell.swift */,
+			);
+			path = Xib;
+			sourceTree = "<group>";
+		};
 		D74C6E9725244130005BF49E = {
 			isa = PBXGroup;
 			children = (
@@ -100,20 +146,12 @@
 		D74C6EA225244130005BF49E /* OpenWeather */ = {
 			isa = PBXGroup;
 			children = (
+				D7193A4F254AA3C900F26702 /* ViewControllers */,
+				D7193A4E254AA39B00F26702 /* Model */,
+				D7193A4D254AA37300F26702 /* CustomClasses */,
 				D74C6EA325244130005BF49E /* AppDelegate.swift */,
 				D74C6EA525244130005BF49E /* SceneDelegate.swift */,
-				D7CA267025491376008F8296 /* Persistance.swift */,
 				D74C6EA925244130005BF49E /* Main.storyboard */,
-				D7193A46254A6C8900F26702 /* StartViewController.swift */,
-				D74C6EA725244130005BF49E /* ViewController.swift */,
-				D7CA267725492CC8008F8296 /* PopUpViewController.swift */,
-				D74C6ECE25287C67005BF49E /* City.swift */,
-				D74C6EC5252827D3005BF49E /* Weather.swift */,
-				D74C6EC825283B1B005BF49E /* LoaderAlamofire.swift */,
-				D716B91125448EE7000AC2AE /* WeatherModel.swift */,
-				D7193A3B25497EFF00F26702 /* CityModel.swift */,
-				D74C6ED32528882B005BF49E /* WeatherTableViewCell.swift */,
-				D74C6ED42528882B005BF49E /* WeatherTableViewCell.xib */,
 				D74C6EAC25244134005BF49E /* Assets.xcassets */,
 				D74C6EAE25244134005BF49E /* LaunchScreen.storyboard */,
 				D74C6EB125244134005BF49E /* Info.plist */,
@@ -242,12 +280,14 @@
 				D74C6EA825244130005BF49E /* ViewController.swift in Sources */,
 				D74C6ECF25287C67005BF49E /* City.swift in Sources */,
 				D716B91225448EE8000AC2AE /* WeatherModel.swift in Sources */,
+				D7193A4B254AA36800F26702 /* BounceButton.swift in Sources */,
 				D7CA267825492CC8008F8296 /* PopUpViewController.swift in Sources */,
 				D7193A47254A6C8900F26702 /* StartViewController.swift in Sources */,
 				D7CA267125491376008F8296 /* Persistance.swift in Sources */,
 				D74C6EC925283B1B005BF49E /* LoaderAlamofire.swift in Sources */,
 				D74C6EA425244130005BF49E /* AppDelegate.swift in Sources */,
 				D74C6EA625244130005BF49E /* SceneDelegate.swift in Sources */,
+				D7193A52254AA49400F26702 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,6 +436,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = Y9XPCMVA2M;
 				INFOPLIST_FILE = "$(SRCROOT)/OpenWeather/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -417,6 +458,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = Y9XPCMVA2M;
 				INFOPLIST_FILE = "$(SRCROOT)/OpenWeather/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;

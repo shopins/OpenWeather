@@ -32,7 +32,7 @@ class PopUpViewController: UIViewController {
     var filterString = ""
     
     var subjects = getSubjectsFiltered(filter: "")
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         cityTableView.layer.cornerRadius = 10
