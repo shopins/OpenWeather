@@ -132,22 +132,3 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate{
         return tableView.frame.height / 7
     }
 }
-
-func moveIn(view: UIView) {
-        view.transform = CGAffineTransform(scaleX: 1.35, y: 1.35)
-        view.alpha = 0.0
-        
-        UIView.animate(withDuration: 0.24) {
-            view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-            view.alpha = 1.0
-        }
-    }
-    
-func moveOut(view: UIView) {
-        UIView.animate(withDuration: 0.24, animations: {
-            view.transform = CGAffineTransform(scaleX: 1.35, y: 1.35)
-            view.alpha = 0.0
-        }) { _ in
-            view.removeFromSuperview()
-        }
-    }
