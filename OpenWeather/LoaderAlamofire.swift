@@ -11,11 +11,12 @@ func AFRequestData(url : String, data: @escaping (Data?) -> Void )
             data(response.data)
         case .failure(let error):
             print("Failed loading data: ", error)
+            data(nil)
         }
     }
 }
 
-func loadWeatherAlamofire(city: City, completion: @escaping (Weather) -> Void) {
+func loadWeatherAlamofire(city: City, completion: @escaping (Weather?) -> Void) {
     if let coords = city.coords {
     let urlString = "https://api.openweathermap.org/data/2.5/onecall?lat=\(coords.lat)&lon=\(coords.lon)&exclude=minutely,hourly,alerts&lang=ru&units=metric&appid=f4f83716824d96e662b7c9214adfe2d1"
     AFRequestData(url: urlString) { data in
@@ -25,11 +26,17 @@ func loadWeatherAlamofire(city: City, completion: @escaping (Weather) -> Void) {
                     completion(weather)
                 }
             }
+            else {
+                completion(nil)
+            }
         }
+    }
+    else {
+        completion(nil)
     }
 }
 
-func loadCityAlamofire(completion: @escaping ([City]) -> Void) {
+func loadCityAlamofire(completion: @escaping ([City]?) -> Void) {
     let urlString = "https://raw.githubusercontent.com/pensnarik/russian-cities/master/russian-cities.json"
     AFRequestData(url: urlString) { data in
         if let data = data,
@@ -37,7 +44,9 @@ func loadCityAlamofire(completion: @escaping ([City]) -> Void) {
                 DispatchQueue.main.async {
                     completion(city)
                 }
-            }
+        } else {
+            completion(nil)
+        }
         }
 }
 
@@ -46,6 +55,9 @@ func loadImage(icon: String, completion: @escaping (UIImage?) -> Void) {
     AFRequestData(url: urlString) { data in
         if let data = data {
             completion(UIImage(data: data))
+        }
+        else {
+            completion(nil)
         }
     }
 }

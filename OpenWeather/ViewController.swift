@@ -26,18 +26,20 @@ class ViewController: UIViewController {
         let notificationCenter = NotificationCenter.default
             notificationCenter.addObserver(self, selector: #selector(appBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
         
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        if !Persistance.shared.isLoadCities {
-            downloadCityDataFromAPI() {
-                if Persistance.shared.currentCity == "" {
-                    self.cityButton.setTitle("Выберите город", for: .normal)
-                    self.performSegue(withIdentifier: "popupCity", sender: nil)
-                }
+        if Persistance.shared.currentCity == "" {
+            self.cityButton.setTitle("Выберите город", for: .normal)
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "popupCity", sender: nil)
             }
         }
+        
+        if let city = getCurrentCity() {
+            if let weather = loadWeatherFromCache(cityName: city.name) {
+                configLabels(weather: weather)
+            }
+            downloadWeatherDataFromAPI(city: city)
+        }
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -63,10 +65,19 @@ class ViewController: UIViewController {
     
     private func downloadWeatherDataFromAPI(city: City) {
             loadWeatherAlamofire(city: city) { weather in
-                weather.lastUpdate = Date()
-                writeWeatherToCache(weather: markDataWeather(cityName: city.name, weather: weather))
-                self.configLabels(weather: weather)
-                self.forcastTableView.reloadData()
+                if let weather = weather {
+                    weather.lastUpdate = Date()
+                    writeWeatherToCache(weather: markDataWeather(cityName: city.name, weather: weather))
+                    self.configLabels(weather: weather)
+                    self.forcastTableView.reloadData()
+                } else {
+                    //no Internet
+                    let alertController = UIAlertController(title: "Ошибка подключения", message: "Для загрузки погоды требуется подключение к сети Интернет", preferredStyle: .alert)
+                    let alertActionOK = UIAlertAction(title: "Ok", style: .default) { (alert) in
+                    }
+                    alertController.addAction(alertActionOK)
+                    self.present(alertController, animated: true, completion: nil)
+                }
             }
     }
     
@@ -132,3 +143,4 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate{
         return tableView.frame.height / 7
     }
 }
+

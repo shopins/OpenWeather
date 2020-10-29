@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="h6o-v4-JQf">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -9,10 +9,52 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Start View Controller-->
+        <scene sceneID="tKS-t6-Mhh">
+            <objects>
+                <viewController id="h6o-v4-JQf" customClass="StartViewController" customModule="OpenWeather" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zle-gE-c5j">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="DFy-YT-TNE">
+                                <rect key="frame" x="186.5" y="610" width="41" height="41.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="DFy-YT-TNE" secondAttribute="height" multiplier="1:1" id="yXf-1p-YMB"/>
+                                </constraints>
+                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="mUr-qf-5Fh">
+                                <rect key="frame" x="103.5" y="344.5" width="207" height="207"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="mUr-qf-5Fh" secondAttribute="height" id="oyL-6S-HFi"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ibp-Q5-COu"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="DFy-YT-TNE" firstAttribute="height" secondItem="mUr-qf-5Fh" secondAttribute="height" multiplier="0.2" id="LKF-ql-LGx"/>
+                            <constraint firstItem="mUr-qf-5Fh" firstAttribute="centerY" secondItem="zle-gE-c5j" secondAttribute="centerY" id="OnQ-Jf-tWo"/>
+                            <constraint firstItem="DFy-YT-TNE" firstAttribute="centerX" secondItem="zle-gE-c5j" secondAttribute="centerX" id="YM9-FE-jgf"/>
+                            <constraint firstItem="DFy-YT-TNE" firstAttribute="bottom" secondItem="mUr-qf-5Fh" secondAttribute="bottom" constant="100" id="eqH-gc-tei"/>
+                            <constraint firstItem="mUr-qf-5Fh" firstAttribute="width" secondItem="zle-gE-c5j" secondAttribute="width" multiplier="0.5" id="gwT-6l-v08"/>
+                            <constraint firstItem="mUr-qf-5Fh" firstAttribute="centerX" secondItem="zle-gE-c5j" secondAttribute="centerX" id="tFc-V0-ePd"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="SpinnerActivityIndicator" destination="DFy-YT-TNE" id="5yy-Us-Yll"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="mainVC" animates="NO" id="KlH-vl-SB6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZIT-xd-Eea" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="267" y="810"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="OpenWeather" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="currentContext" id="BYZ-38-t0r" customClass="ViewController" customModule="OpenWeather" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -58,13 +100,13 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ajc-t2-8mo" userLabel="Temperature">
-                                                <rect key="frame" x="0.0" y="89" width="50" height="24.5"/>
+                                                <rect key="frame" x="0.0" y="89" width="50" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="47"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQF-cQ-Xeb" userLabel="Pressure">
-                                                <rect key="frame" x="0.0" y="113.5" width="50" height="50"/>
+                                                <rect key="frame" x="0.0" y="139" width="50" height="24.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -138,6 +180,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" id="uws-n1-fVI"/>
+                    <navigationItem key="navigationItem" id="pfu-yT-lNS"/>
                     <connections>
                         <outlet property="cityButton" destination="9JF-ba-WeQ" id="nWB-Ia-G3p"/>
                         <outlet property="descriptionLabel" destination="NYN-8h-ZzB" id="tI7-xQ-4EL"/>
@@ -158,21 +201,21 @@
             <objects>
                 <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="hN7-A8-9gJ" customClass="PopUpViewController" customModule="OpenWeather" customModuleProvider="target" sceneMemberID="viewController">
                     <visualEffectView key="view" opaque="NO" contentMode="scaleToFill" id="bsn-YK-OP1">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ZR7-ol-q1p">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hqp-Tf-Wb6">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                                     <state key="normal" title="Button"/>
                                     <connections>
                                         <action selector="pressCancel:" destination="hN7-A8-9gJ" eventType="touchUpInside" id="nwk-dN-q0x"/>
                                     </connections>
                                 </button>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="nUX-68-Io3">
-                                    <rect key="frame" x="62" y="89.5" width="290" height="717"/>
+                                    <rect key="frame" x="62" y="84" width="290" height="674"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Выберите город" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bFd-d1-VVU">
                                             <rect key="frame" x="0.0" y="0.0" width="290" height="20"/>
@@ -197,7 +240,7 @@
                                             </connections>
                                         </textField>
                                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="N2d-V6-VyK">
-                                            <rect key="frame" x="0.0" y="70" width="290" height="647"/>
+                                            <rect key="frame" x="0.0" y="70" width="290" height="604"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <prototypes>
                                                 <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CityCell" id="XQd-Yh-SIj">
@@ -233,6 +276,7 @@
                     </visualEffectView>
                     <connections>
                         <outlet property="cityTableView" destination="N2d-V6-VyK" id="cim-tl-xfo"/>
+                        <outlet property="mainLabel" destination="bFd-d1-VVU" id="9TK-Dh-e7U"/>
                         <outlet property="searchTextField" destination="veX-z2-c97" id="6Rm-Vf-RxH"/>
                     </connections>
                 </viewController>
@@ -242,6 +286,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Logo" width="1024" height="1024"/>
         <image name="reload" width="128" height="128"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

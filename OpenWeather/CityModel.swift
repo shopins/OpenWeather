@@ -13,12 +13,14 @@ func writeCityToCache(city: City) {
 }
 
 func downloadCityDataFromAPI(completion: @escaping () -> Void) {
-        loadCityAlamofire { cityArray in
+    loadCityAlamofire { cityArray in
+        if let cityArray = cityArray, !cityArray.isEmpty {
             for city in cityArray {
                 writeCityToCache(city: city)
             }
-        Persistance.shared.isLoadCities = true
-            completion()
+            Persistance.shared.isLoadCities = true
+        }
+        completion()
     }
 }
 

@@ -10,6 +10,8 @@ class PopUpViewController: UIViewController {
 
     @IBOutlet weak var cityTableView: UITableView!
     
+    @IBOutlet weak var mainLabel: UILabel!
+    
     @IBAction func editingTextFiled(_ sender: UITextField) {
         if sender.text?.count != 0 {
             filterString = sender.text!
@@ -35,6 +37,26 @@ class PopUpViewController: UIViewController {
         super.viewDidLoad()
         cityTableView.layer.cornerRadius = 10
         cityTableView.layer.masksToBounds = true
+        mainLabel.text = "Выберите город"
+        
+        if !Persistance.shared.isLoadCities {
+            let alertController = UIAlertController(title: "Ошибка подключения", message: "Для загрузки городов требуется подключение к сети Интернет", preferredStyle: .alert)
+            let alertActionOK = UIAlertAction(title: "Ok", style: .default) { (alert) in
+                self.dismiss(animated: true, completion: nil)
+            }
+            alertController.addAction(alertActionOK)
+            mainLabel.text = "Идет загрузка данных о городах..."
+            downloadCityDataFromAPI() {
+                if !Persistance.shared.isLoadCities {
+                    self.present(alertController, animated: true, completion: nil)
+                } else {
+                    self.mainLabel.text = "Выберите город"
+                    self.subjects = getSubjectsFiltered(filter: "")
+                    self.cityTableView.reloadData()
+                }
+            }
+        }
+        
     }
         
     @IBOutlet weak var searchTextField: UITextField!
